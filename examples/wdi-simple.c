@@ -26,6 +26,7 @@
 #include <getopt.h>
 #endif
 #include "libwdi.h"
+#include "shlobj.h"
 
 #if defined(_PREFAST_)
 /* Disable "Banned API Usage:" errors when using WDK's OACR/Prefast */
@@ -40,11 +41,11 @@
  * Change these values according to your device if
  * you don't want to provide parameters
  */
-#define DESC        "Microsoft XBox Controller Type S"
-#define VID         0x045E
-#define PID         0x0289
-#define INF_NAME    "usb_device.inf"
-#define DEFAULT_DIR "usb_driver"
+#define DESC        "3D Camera Driver"
+#define VID         0x734D
+#define PID         0x0100
+#define INF_NAME    "camera_device.inf"
+#define DEFAULT_DIR "camera_driver"
 
 
 void usage(void)
@@ -104,6 +105,23 @@ int __cdecl main(int argc, char** argv)
 	char *inf_name = INF_NAME;
 	char *ext_dir = DEFAULT_DIR;
 	char *cert_name = NULL;
+
+    static char name[256];
+    LPITEMIDLIST pidl = NULL;
+    SHGetSpecialFolderLocation(NULL, CSIDL_LOCAL_APPDATA, &pidl);
+    if (pidl) {
+        SHGetPathFromIDListA(pidl, name);
+        CoTaskMemFree(pidl);
+    }
+    if (strlen(name) > 200) {
+        ext_dir = DEFAULT_DIR;
+    }
+    else {
+        sprintf(name, "%s\\%s", name, DEFAULT_DIR);
+        ext_dir = name;
+    }
+
+
 
 	static struct option long_options[] = {
 		{"name", required_argument, 0, 'n'},
@@ -244,3 +262,20 @@ int __cdecl main(int argc, char** argv)
 
 	return r;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

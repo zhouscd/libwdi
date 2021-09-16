@@ -37,17 +37,17 @@
 
 /* embed libusb0 driver files from the following location */
 #ifndef LIBUSB0_DIR
-#define LIBUSB0_DIR "D:/libusb-win32"
+#define LIBUSB0_DIR "../usb_driver"
 #endif
 
 /* embed libusbK driver files from the following location */
 #ifndef LIBUSBK_DIR
-#define LIBUSBK_DIR "D:/libusbK/bin"
+#define LIBUSBK_DIR "../usb_driver"
 #endif
 
 /* embed user defined driver files from the following location */
 #ifndef USER_DIR
-// #define USER_DIR "C:/signed-driver"
+//#define USER_DIR  "../usb_driver"
 #endif
 
 /* 32 bit support */
@@ -64,3 +64,11 @@
 
 /* Message logging */
 #define ENABLE_LOGGING 1
+
+
+
+
+
+
+
+
